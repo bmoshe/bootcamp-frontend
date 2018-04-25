@@ -1,0 +1,12 @@
+{
+  "projectId": "noufzj",
+  "baseUrl": "http://localhost:4200",
+  "defaultCommandTimeout": 40000,
+  "viewportWidth": 1440,
+  "viewportHeight": 900,
+  "reporter": "junit",
+  "reporterOptions": {
+    "mochaFile": "/tmp/junit/cypress.home.junit.xml",
+    "toConsole": true
+  }
+}
