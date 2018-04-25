@@ -1,0 +1,20 @@
+// Place your settings in this file to overwrite default and user settings.
+{
+  "files.insertFinalNewline": true,
+  "editor.tabSize": 2,
+  "editor.tabCompletion": true,
+  "files.trimTrailingWhitespace": true,
+  "html.format.endWithNewline": true,
+  "ruby.lint": {
+    "rubocop": true
+  },
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
+  "[html]": {
+    "editor.formatOnPaste": false,
+    "editor.formatOnSave": false
+  },
+  "html.format.wrapLineLength": 100,
+  "html.format.maxPreserveNewLines": 1,
+  "vsicons.presets.angular": true
+}

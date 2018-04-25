@@ -1,0 +1,8 @@
+<section class="plTaskList">
+  <section class="plTaskList-task" *ngFor="let task of tasks; let i = index">
+    <button class="plTaskList-completeBtn" *ngIf="!task.completed" (click)="completeTask(i)">Complete</button>
+    <span class="plTaskList-completedText" *ngIf="task.completed">COMPLETED</span>
+    {{ task.name }}
+    <button class="plTaskList-deleteBtn" (click)="deleteTask(i)">X</button>
+  </section>
+</section>
