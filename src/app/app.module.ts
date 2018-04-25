@@ -8,6 +8,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { ApiModule } from './api/api.module';
 
 import { AppComponent } from './app.component';
+import { AuthModule } from './auth/auth.module';
 import { TaskModule } from './task/task.module';
 
 @NgModule({
@@ -22,6 +23,7 @@ import { TaskModule } from './task/task.module';
     StoreDevtoolsModule.instrument({ maxAge: 50 }),
     EffectsModule.forRoot([]),
     ApiModule,
+    AuthModule,
     TaskModule
   ],
   providers: []

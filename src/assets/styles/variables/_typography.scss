@@ -1,0 +1,79 @@
+$pl-fs-1: floor(($font-size-base * 2.6)); // ~36px
+$pl-fs-2: floor(($font-size-base * 2.15)); // ~30px
+$pl-fs-3: ceil(($font-size-base * 1.7)); // ~24px
+$pl-fs-4: ceil(($font-size-base * 1.43)); // ~20px
+$pl-fs-5: ceil(($font-size-base * 1.25)); // ~18px
+$pl-fs-6: ceil(($font-size-base * 1.14)); // ~16px
+$pl-fs-7: $font-size-base;
+$pl-fs-8: ceil(($font-size-base * .85)); // ~12px
+$pl-fs-9: ceil(($font-size-base * .7)); // ~10px
+$pl-fs-10: ceil(($font-size-base * .65)); // ~8px
+
+$pl-fw-s-light: 300;
+$pl-fw-s-regular: 400;
+$pl-fw-s-bold: 700;
+
+$pl-fw-ss-light: 300;
+$pl-fw-ss-regular: 400;
+$pl-fw-ss-medium: 500;
+$pl-fw-ss-bold: 700;
+
+%font-smoothing {
+  -webkit-font-smoothing: antialiased; // sass-lint:disable-line no-vendor-prefixes
+  -moz-osx-font-smoothing: grayscale; // sass-lint:disable-line no-vendor-prefixes
+}
+
+%pl-ss-light {
+  font-family: $font-family-sans-serif;
+  font-weight: $pl-fw-ss-light;
+}
+
+%pl-ss-regular {
+  font-family: $font-family-sans-serif;
+  font-weight: $pl-fw-ss-regular;
+}
+
+%pl-ss-medium {
+  font-family: $font-family-sans-serif;
+  font-weight: $pl-fw-ss-medium;
+}
+
+%pl-ss-bold {
+  font-family: $font-family-sans-serif;
+  font-weight: $pl-fw-ss-bold;
+}
+
+%pl-s-light {
+  font-family: $font-family-serif;
+  font-weight: $pl-fw-s-light;
+}
+
+%pl-s-regular {
+  font-family: $font-family-serif;
+  font-weight: $pl-fw-s-regular;
+}
+
+%pl-s-bold {
+  font-family: $font-family-serif;
+  font-weight: $pl-fw-s-bold;
+}
+
+%pl-ss-heading-light {
+  @extend %pl-ss-light;
+  display: block;
+}
+
+%pl-s-heading-light {
+  @extend %pl-s-light;
+  display: block;
+}
+
+%pl-s-heading-regular {
+  @extend %pl-s-regular;
+  display: block;
+}
+
+%pl-s-heading-bold {
+  @extend %pl-s-bold;
+  display: block;
+}

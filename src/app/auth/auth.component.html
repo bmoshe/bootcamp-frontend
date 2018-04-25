@@ -1,0 +1,24 @@
+<section class="plAuth">
+  <section class="plAuth-content">
+    <form (ngSubmit)="login()">
+      <header class="plAuth-header">
+        TODO Login
+      </header>
+
+      <section class="plAuth-fields">
+        <section class="plAuth-fieldContainer">
+          <input type="email" name="email" class="plAuth-field" [(ngModel)]="email" placeholder="Email Address">
+        </section>
+        <section class="plAuth-fieldContainer">
+          <input type="password" name="password" class="plAuth-field" [(ngModel)]="password" placeholder="Password">
+        </section>
+      </section>
+
+      <footer class="plAuth-footer">
+        <button class="plAuth-submitBtn" type="submit">
+          Log In
+        </button>
+      </footer>
+    </form>
+  </section>
+</section>

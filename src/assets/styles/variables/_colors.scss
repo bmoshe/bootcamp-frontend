@@ -1,0 +1,18 @@
+$brand-primary: #ff7352;
+$brand-success: $brand-primary;
+$brand-info: #a0a0a0;
+$brand-warning: #ffac44;
+$brand-danger: #000;
+$brand-green: #63d1a1;
+$brand-blue: #3c35c4;
+
+$white: #fff;
+$black: #000;
+$border-color: #ccc;
+
+$gray-base: $black;
+$gray-dark: lighten($gray-base, 20%);
+$gray: lighten($gray-base, 33.5%);
+$gray-light: lighten($gray-base, 66.7%);
+$gray-lighter: lighten($gray-base, 93.5%);
+$gray-offwhite: #f7f7f7;

@@ -1,32 +1,70 @@
 {
-    "extends": ["tslint:recommended"],
+    "extends": [
+        "tslint:recommended"
+    ],
     "rulesDirectory": [
         "node_modules/codelyzer",
         "node_modules/tslint-microsoft-contrib"
     ],
     "rules": {
-        "align": [true, "parameters", "statements", "arguments"],
-        "array-type": [true, "array"],
+        "align": [
+            true,
+            "parameters",
+            "statements",
+            "arguments"
+        ],
+        "array-type": [
+            true,
+            "array"
+        ],
         "await-promise": true,
-        "ban": [true, "fdescribe", "fit"],
-        "cyclomatic-complexity": [true, 20],
-        "linebreak-style": [true, "LF"],
+        "ban": [
+            true,
+            "fdescribe",
+            "fit"
+        ],
+        "cyclomatic-complexity": [
+            true,
+            20
+        ],
+        "linebreak-style": [
+            true,
+            "LF"
+        ],
         "newline-before-return": true,
-        "member-access": [true, "no-public"],
-        "member-ordering": [true,  { "order": "instance-sandwich" }],
+        "member-access": [
+            true,
+            "no-public"
+        ],
+        "member-ordering": [
+            true,
+            {
+                "order": "instance-sandwich"
+            }
+        ],
         "no-boolean-literal-compare": true,
         "no-default-export": true,
-        "no-duplicate-variable": [true, "check-parameters"],
+        "no-duplicate-variable": [
+            true,
+            "check-parameters"
+        ],
         "no-for-in-array": true,
         "no-import-side-effect": true,
-        "no-inferrable-types": [ true, "ignore-params"],
+        "no-inferrable-types": [
+            true,
+            "ignore-params"
+        ],
         "no-mergeable-namespace": true,
         "no-require-imports": true,
         "no-unnecessary-qualifier": true,
         "one-variable-per-declaration": false,
         "prefer-method-signature": true,
         "prefer-object-spread": false,
-        "quotemark": [true, "single", "avoid-escape"],
+        "quotemark": [
+            true,
+            "single",
+            "avoid-escape"
+        ],
         "restrict-plus-operands": true,
         "semicolon": [
             true,
@@ -34,7 +72,13 @@
             "ignore-bound-class-methods"
         ],
         "switch-default": true,
-        "trailing-comma": [true, { "multiline": "never", "singleline": "never" }],
+        "trailing-comma": [
+            true,
+            {
+                "multiline": "never",
+                "singleline": "never"
+            }
+        ],
         "typedef": [
             true,
             "call-signature",
@@ -58,13 +102,32 @@
             "check-type",
             "check-preblock"
         ],
-
         // codelyzer
         "banana-in-box": true,
-        "component-class-suffix": [true, "Component"],
-        "component-selector": [true, "element", ["pl"], "kebab-case"],
-        "directive-class-suffix": [true, "Directive"],
-        "directive-selector": [false, "attribute", ["pl"], "camelCase"],
+        "component-class-suffix": [
+            true,
+            "Component"
+        ],
+        "component-selector": [
+            true,
+            "element",
+            [
+                "pl"
+            ],
+            "kebab-case"
+        ],
+        "directive-class-suffix": [
+            true,
+            "Directive"
+        ],
+        "directive-selector": [
+            false,
+            "attribute",
+            [
+                "pl"
+            ],
+            "camelCase"
+        ],
         "invoke-injectable": true,
         "no-access-missing-member": true,
         "no-attribute-parameter-decorator": true,
@@ -77,7 +140,6 @@
         "use-life-cycle-interface": true,
         "use-output-property-decorator": true,
         "use-pipe-transform-interface": true,
-
         // tslint-microsoft-contrib rules
         "insecure-random": true,
         "max-func-body-length": [
@@ -88,6 +150,7 @@
                 "ignore-comments": true
             }
         ],
+        "max-classes-per-file": false,
         "missing-jsdoc": false,
         "no-banned-terms": true,
         "no-constant-condition": true,
