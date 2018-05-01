@@ -33,14 +33,6 @@ export function authReducer(state: IAuthState = DEFAULT_STATE, action: AuthActio
         loginRequestStatus: { status: ApiRequestStatus.Failure, errors: action.errors }
       };
 
-    case AuthActions.Logout:
-      return {
-        ...state,
-        authStatus: AuthStatus.Unauthenticated,
-        loginRequestStatus: { status: ApiRequestStatus.Undefined },
-        session: null
-      };
-
     case AuthActions.Rehydrate:
       return {
         ...state,

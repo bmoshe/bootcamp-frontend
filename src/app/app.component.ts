@@ -40,8 +40,12 @@ export class AppComponent extends ReactiveComponent implements OnInit {
     this.newTaskName = '';
     this.tasks = [];
 
-    this._taskService.list()
-      .subscribe((taskList) => this.tasks = taskList.tasks);
+    this.user$
+      .filter((user) => user != null)
+      .subscribe(() => {
+        this._taskService.list()
+          .subscribe((taskList) => this.tasks = taskList.tasks);
+      });
   }
 
   addTask(): void {

@@ -10,7 +10,9 @@ export enum AuthActions {
   Rehydrate = '[AUTH] Rehydrate',
   RehydrateSuccess = '[AUTH] Rehydrate Success',
 
-  Logout = '[AUTH] Logout'
+  Logout = '[AUTH] Logout',
+  LogoutSuccess = '[AUTH] Logout Success',
+  LogoutFailure = '[AUTH] Logout Failure'
 }
 
 export class AuthLoginAction implements Action {

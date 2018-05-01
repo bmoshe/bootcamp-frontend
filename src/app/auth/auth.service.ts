@@ -13,9 +13,9 @@ export class AuthService {
       .map((response) => response.json().session);
   }
 
-  sessionForToken(token: string): Observable<ISession> {
+  currentSession(): Observable<ISession> {
     return this._apiService
-      .get(`session/${token}`)
+      .get('session')
       .map((response) => response.json().session);
   }
 }

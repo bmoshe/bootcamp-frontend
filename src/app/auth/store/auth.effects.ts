@@ -36,15 +36,9 @@ export class AuthEffects {
     return this._actions
       .ofType<AuthRehydrateAction>(AuthActions.Rehydrate)
       .switchMap((action) => {
-        const token = localStorage.getItem('authToken');
-
-        if (!token) {
-          return Observable.of(new AuthRehydrateSuccessAction(null));
-        }
-
         return this._authService
-          .sessionForToken(token)
-          .do(() => localStorage.setItem('authToken', token))
+          .currentSession()
+          .do((session) => localStorage.setItem('authToken', session.token))
           .map((session) => new AuthRehydrateSuccessAction(session))
           .catch(() => [new AuthRehydrateSuccessAction(null)]);
       });

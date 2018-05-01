@@ -76,8 +76,13 @@ export class ApiService {
     if (request.headers == null) {
       request.headers = new Headers();
     }
+
     if (!request.headers.has('Content-Type')) {
       request.headers.append('Content-Type', 'application/json');
+    }
+
+    if (!request.headers.has('Session-Token')) {
+      request.headers.append('Session-Token', localStorage.getItem('authToken'));
     }
 
     return request;
