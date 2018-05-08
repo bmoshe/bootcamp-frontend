@@ -30,6 +30,60 @@ The goal of this task is to introduce several concepts that are used heavily in 
 
 ### Getting Started
 
+##### VSCode Settings
+
+First, install VSCode (if you haven't already).
+
+Here is a list of extensions to get you started:
+
+```
+Angular.ng-template
+CoenraadS.bracket-pair-colorizer
+CraigMaslowski.erb
+Equinusocio.vsc-material-theme
+Mikael.Angular-BeastCode
+PeterJausovec.vscode-docker
+christian-kohler.path-intellisense
+codezombiech.gitignore
+eamodio.gitlens
+eg2.tslint
+glen-84.sass-lint
+mikestead.dotenv
+pmneo.tsimporter
+rbbit.typescript-hero
+robertohuertasm.vscode-icons
+waderyan.gitblame
+```
+
+You can also setup the workspace settings (open with `cmd` + `,`):
+
+```json
+{
+  "files.insertFinalNewline": true,
+  "editor.tabSize": 2,
+  "editor.tabCompletion": true,
+  "files.trimTrailingWhitespace": true,
+  "html.format.endWithNewline": true,
+  "ruby.lint": {
+    "rubocop": true
+  },
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
+  "[html]": {
+    "editor.formatOnPaste": false,
+    "editor.formatOnSave": false
+  },
+  "html.format.wrapLineLength": 100,
+  "html.format.maxPreserveNewLines": 1,
+  "vsicons.presets.angular": true
+}
+
+```
+
+Feel free to customize your user settings outside of the workpsace settings above.
+
+##### Getting The App Ready
+
 First, fork the `platterz/bootcamp-frontend` app.
 
 Then run the following:
@@ -487,16 +541,29 @@ For example, you 2 components: `pl-parent` and `pl-child`, where `pl-child` is n
 
 The styles for this project are open-ended, so you can experiment with it and see what you can do. Don't be afraid to bug one of us for help here!
 
+We also want you to make use of the variables in `assets/styles/variables`. Also try your hand with `mixins`.
+
 ### Unit Tests
 
 In addition to writing the functionality of your app, we also want you to test the different components and pieces of it.
 
 All test files are present, you just need to fill in the tests.
 
+For examples of how to test, you can refer to spec files inside the `auth` folder. You may also reference tests in our current codebase in `platterz/home` or `platterz/common`.
+
+In order to run the tests, you need to install Jest globally:
+
+```bash
+$ yarn global add jest
+```
+
+You can run your tests with `yarn test:watch`, or `yarn test` for a single run.
+
 You can use these resources to help you along:
 
-https://angular.io/guide/testing
-https://blog.jetbrains.com/webstorm/2017/02/your-first-unit-test-using-angular-cli-karma-and-webstorm
+https://docs.angularjs.org/guide/unit-testing
+https://facebook.github.io/jest/docs/en/getting-started.html
+https://github.com/ngrx/platform/blob/master/docs/store/testing.md
 
 ### End-to-End Tests
 
@@ -505,7 +572,7 @@ For our integration tests, we use a tool called [Cypress](https://docs.cypress.i
 There are 4 main parts to how we structure our tests:
 
 - Integrations. These are what is actually run by Cypress.
-- Flows. These are collections of commands that are packaged to be reusable. The will reduce the amount of code written in our integrations.
+- Flows. These are collections of commands that are packaged to be reusable. They will reduce the amount of code written in our integrations.
 - Components. These are simple classes with many getters that represent elements on the page.
 - Seeds. These are helpers to seed data to the API before you run your test. This will not be applicable here, as we won't have a backend for the feature.
 
