@@ -543,6 +543,13 @@ The styles for this project are open-ended, so you can experiment with it and se
 
 We also want you to make use of the variables in `assets/styles/variables`. Also try your hand with `mixins`.
 
+Here are some ideas to get you started:
+
+1. Add the task list to a container, similar to the auth page.
+2. Add the complete/delete buttons to a dropdown or hideable menu
+3. Separate your tasks in your lists visually. You could use a simple border between them, or make them separate boxes with some margin between
+4. Make the task input nice and big, and add a placeholder and/or title
+
 ### Unit Tests
 
 In addition to writing the functionality of your app, we also want you to test the different components and pieces of it.
