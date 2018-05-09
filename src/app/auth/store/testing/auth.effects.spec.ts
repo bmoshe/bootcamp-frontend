@@ -2,7 +2,7 @@ import { async, TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { Action, StoreModule } from '@ngrx/store';
 import { Observable, ReplaySubject } from 'rxjs/Rx';
-import { jestCreateSpyObj } from '../../../../jest.helpers';
+import { jestCreateSpyObj } from '../../../../jest/jest.helpers';
 import { AuthService } from '../../auth.service';
 import { mockSession } from '../../testing/session.mock';
 import { AuthActions, AuthLoginAction, AuthLoginFailureAction, AuthLoginSuccessAction } from '../auth.actions';

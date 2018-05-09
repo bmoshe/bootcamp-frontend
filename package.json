@@ -52,7 +52,7 @@
       "<rootDir>/node_modules/jest-preset-angular/AngularSnapshotSerializer.js",
       "<rootDir>/node_modules/jest-preset-angular/HTMLCommentSerializer.js"
     ],
-    "setupTestFrameworkScriptFile": "<rootDir>/src/setupJest.ts"
+    "setupTestFrameworkScriptFile": "<rootDir>/src/jest/setupJest.ts"
   },
   "private": true,
   "dependencies": {
