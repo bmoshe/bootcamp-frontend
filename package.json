@@ -15,7 +15,9 @@
     "lint": "ng lint",
     "cypress": "cypress run",
     "cypress:install": "cypress install",
-    "cypress:verify": "cypress verify"
+    "cypress:verify": "cypress verify",
+    "gql:schema": "node ./node_modules/.bin/apollo service:download ./src/gql/schema.json -c ./apollo/apollo.dev.config.js",
+    "gql:codegen": "apollo client:codegen graphql --globalTypesFile=src/gql/globalTypes.ts --localSchemaFile=src/gql/schema.json --target=typescript --no-addTypename"
   },
   "jest": {
     "globals": {
@@ -79,12 +81,15 @@
     "apollo-link": "^1.2.3",
     "apollo-link-context": "^1.0.9",
     "core-js": "^2.5.4",
+    "graphql": "^14.0.2",
+    "graphql-tag": "^2.10.0",
     "lodash": "^4.17.4",
     "rxjs": "~6.3.3",
     "zone.js": "~0.8.26"
   },
   "devDependencies": {
     "@angular/language-service": "7.2.0",
+    "@types/jasmine": "^3.3.5",
     "@types/jest": "^22.2.3",
     "@types/node": "~6.0.60",
     "babel-core": "^6.26.3",

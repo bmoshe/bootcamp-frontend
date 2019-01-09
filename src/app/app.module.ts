@@ -7,8 +7,11 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { ApiModule } from './api/api.module';
 
+import { PlatterzGraphQLModule } from './apollo/graphql.module';
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth.module';
+import { TaskListModule } from './task-list/task-list.module';
 import { TaskModule } from './task/task.module';
 
 @NgModule({
@@ -19,12 +22,15 @@ import { TaskModule } from './task/task.module';
   imports: [
     BrowserModule,
     FormsModule,
+    AppRoutingModule,
     StoreModule.forRoot({}),
     StoreDevtoolsModule.instrument({ maxAge: 50 }),
     EffectsModule.forRoot([]),
     ApiModule,
     AuthModule,
-    TaskModule
+    TaskModule,
+    TaskListModule,
+    PlatterzGraphQLModule
   ],
   providers: []
 })

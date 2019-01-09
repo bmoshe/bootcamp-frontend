@@ -1,0 +1,4 @@
+
+<a *ngFor="let list of lists$ | async" [routerLink]="linkForList(list)">
+  {{ list.name }}
+</a>

@@ -1,14 +1,1 @@
-<section class="plApp">
-  <pl-auth *ngIf="!(loggedIn$ | async) && !(authLoading$ | async)"></pl-auth>
-
-  <ng-container *ngIf="loggedIn$ | async">
-    <form (ngSubmit)="addTask()">
-      <section class="plApp-inputContainer">
-        <input type="text" class="plApp-input" [(ngModel)]="newTaskName" placeholder="Add Task" name="task_name">
-        <button type="submit" class="plApp-submitBtn">Save</button>
-      </section>
-    </form>
-    <header class="plApp-header">My To-dos:</header>
-    <pl-task-list [tasks]="tasks" (taskComplete)="onTaskComplete($event)" (taskDelete)="onTaskDelete($event)"></pl-task-list>
-  </ng-container>
-</section>
+<router-outlet></router-outlet>
