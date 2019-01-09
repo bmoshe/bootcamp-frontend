@@ -18,7 +18,7 @@ const routes: Routes = [
   {
     path: 'task-lists',
     component: TaskListsComponent,
-    canActivate: [AuthenticatedGuard],
+    // canActivate: [AuthenticatedGuard],
     children: [
       { path: '', component: NoTaskListComponent },
       { path: 'create', component: CreateTaskListComponent },

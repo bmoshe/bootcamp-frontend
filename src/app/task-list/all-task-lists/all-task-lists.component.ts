@@ -4,7 +4,7 @@ import { RXComponent } from '../../rx-component/rx-component';
 
 @Component({
   selector: 'pl-all-task-lists',
-  templateUrl: './all-task-lists.component.scss',
+  templateUrl: './all-task-lists.component.html',
   styleUrls: ['./all-task-lists.component.scss']
 })
 export class AllTaskListsComponent extends RXComponent implements OnInit {

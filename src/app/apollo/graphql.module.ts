@@ -1,4 +1,4 @@
-import { HttpHeaders } from '@angular/common/http';
+import { HttpClientModule, HttpHeaders } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { APOLLO_OPTIONS, ApolloModule } from 'apollo-angular';
 import { HttpLink, HttpLinkModule } from 'apollo-angular-link-http';
@@ -46,7 +46,8 @@ const apolloFactory = (httpLink: HttpLink) => {
   ],
   exports: [
     ApolloModule,
-    HttpLinkModule
+    HttpLinkModule,
+    HttpClientModule
   ],
   providers: [
     { provide: APOLLO_OPTIONS, useFactory: apolloFactory, deps: [HttpLink] }

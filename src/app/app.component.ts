@@ -14,14 +14,6 @@ import { IUser } from './user/user';
   templateUrl: './app.component.html'
 })
 export class AppComponent extends RXComponent implements OnInit {
-  newTaskName: string;
-  errors: IApiError;
-
-  user$: Observable<IUser>;
-  authStatus$: Observable<AuthStatus>;
-  loggedIn$: Observable<boolean>;
-  authLoading$: Observable<boolean>;
-
   constructor(private _store: Store<IAppState>) {
     super();
   }

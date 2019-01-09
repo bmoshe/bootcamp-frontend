@@ -1,0 +1,16 @@
+@import '../../../assets/styles/variables/variables';
+@import '../../../assets/styles/mixins/mixins';
+
+:host {
+  display: block;
+  width: 100vw;
+  min-height: 100vh;
+  padding: 1rem 1rem 1rem 22rem;
+  background-color: $gray-lighter;
+}
+
+.plTaskLists-content {
+  display: flex;
+  max-width: 30rem;
+  margin: auto;
+}

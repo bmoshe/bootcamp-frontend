@@ -1,4 +1,11 @@
+<header class="plAllTaskLists-header">Your Task Lists</header>
 
-<a *ngFor="let list of lists$ | async" [routerLink]="linkForList(list)">
+<a class="plAllTaskLists-link" routerLink="/task-lists/create" routerLinkActive="isActive">
+  Create Task List
+</a>
+
+<!-- Feel free to change this to fit your solution -->
+<a class="plAllTaskLists-link" *ngFor="let list of lists$ | async"
+  [routerLink]="linkForList(list)" routerLinkActive="isActive">
   {{ list.name }}
 </a>
