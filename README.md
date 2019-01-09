@@ -2,7 +2,7 @@
 
 ### Goals
 
-The goal of this task is to introduce several concepts that are used heavily in all Angular 4+ portions of our front-end applications:
+The goal of this task is to introduce several concepts that are used heavily in all Angular 7+ portions of our front-end applications:
 
 - Observables
 - NGRX
