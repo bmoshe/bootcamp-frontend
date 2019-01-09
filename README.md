@@ -635,12 +635,23 @@ Authentication is already includedauth
 
 At Platterz, we use a BEM-style of CSS.
 
-Eg, the task section has a class of `.plTaskList-task`
+BEM stands for **B**lock **E**lement **M**odifier and denotes a methodology through which CSS can be organized. 
+
+For example, the task section has a class of `.plTaskList-task`
 `plTaskList` is the component that we are currently in, and `-task` is the portion that we are styling.
+
+This describes the `plTaskList` block and the `task` element within it. This can then have modifiers bound with `--` that can denote specific _types_ of that element. For example: `plTaskList-task--complete` & `plTaskList-task--incomplete`. 
+
+Due to our usage of Angular you probably won't find much need to use modifiers in your code. You'll probably make use of `NgClass` and modify elements like this instead:
+```html
+<section class="plTaskList-task" [class.isComplete]="..." [class.isIncomplete]="...">
+  ...
+</section>
+```
 
 We also use component styling. Styles are written for specific components in their folder, and are scoped to their context.
 
-For example, you 2 components: `pl-parent` and `pl-child`, where `pl-child` is nested inside `pl-parent`. Styles written for the parent component will not apply to elements inside the child component.
+For example, consider 2 components: `pl-parent` and `pl-child`, where `pl-child` is nested inside `pl-parent`. Styles written for the parent component will not apply to elements inside the child component.
 
 The styles for this project are open-ended, so you can experiment with it and see what you can do. Don't be afraid to bug one of us for help here!
 
