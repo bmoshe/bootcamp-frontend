@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { ApiService } from '../api/api.service';
 import { ISession } from './session';
 
@@ -10,12 +11,12 @@ export class AuthService {
   login(email: string, password: string): Observable<ISession> {
     return this._apiService
       .post('session', { email, password })
-      .map((response) => response.json().session);
+      .pipe(map((response) => response.json().session));
   }
 
   currentSession(): Observable<ISession> {
     return this._apiService
       .get('session')
-      .map((response) => response.json().session);
+      .pipe(map((response) => response.json().session));
   }
 }

@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs';
+import { filter, map, takeUntil } from 'rxjs/operators';
 import { IApiError } from './api/api.error';
 import { AuthStatus } from './auth/auth-status.enum';
 import { AuthRehydrateAction } from './auth/store/auth.actions';
 import { selectAuthStatus, selectAuthUser } from './auth/store/auth.selectors';
-import { ReactiveComponent } from './reactive-component/reactive-component';
+import { RXComponent } from './rx-component/rx-component';
 import { IAppState } from './store/app.state';
 import { ITask } from './task/task';
 import { TaskService } from './task/task.service';
@@ -16,7 +17,7 @@ import { IUser } from './user/user';
   styleUrls: ['./app.component.scss'],
   templateUrl: './app.component.html'
 })
-export class AppComponent extends ReactiveComponent implements OnInit {
+export class AppComponent extends RXComponent implements OnInit {
   newTaskName: string;
   tasks: ITask[];
   errors: IApiError;
@@ -41,7 +42,7 @@ export class AppComponent extends ReactiveComponent implements OnInit {
     this.tasks = [];
 
     this.user$
-      .filter((user) => user != null)
+      .pipe(filter((user) => user != null))
       .subscribe(() => {
         this._taskService.list()
           .subscribe((taskList) => this.tasks = taskList.tasks);
@@ -78,16 +79,16 @@ export class AppComponent extends ReactiveComponent implements OnInit {
   private _bindObservables(): void {
     this.user$ = this._store
       .select(selectAuthUser)
-      .takeUntil(this._ngOnDestroy);
+      .pipe(takeUntil(this._ngOnDestroy));
 
     this.authStatus$ = this._store
       .select(selectAuthStatus)
-      .takeUntil(this._ngOnDestroy);
+      .pipe(takeUntil(this._ngOnDestroy));
 
     this.loggedIn$ = this.authStatus$
-      .map((status) => status === AuthStatus.Authenticated);
+      .pipe(map((status) => status === AuthStatus.Authenticated));
 
     this.authLoading$ = this.authStatus$
-      .map((status) => status === AuthStatus.Rehydrating);
+      .pipe(map((status) => status === AuthStatus.Rehydrating));
   }
 }

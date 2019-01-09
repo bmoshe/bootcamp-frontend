@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { ApiService } from '../api/api.service';
 import { ITask, ITaskList } from './task';
 
@@ -10,7 +11,7 @@ export class TaskService {
   list(): Observable<ITaskList> {
     return this._apiService
       .get('tasks')
-      .map((response) => response.json());
+      .pipe(map((response) => response.json()));
   }
 
   save(task: Partial<ITask>): Observable<ITask> {
@@ -20,18 +21,18 @@ export class TaskService {
   delete(task: ITask): Observable<ITask> {
     return this._apiService
       .delete(`tasks/${task.id}`)
-      .map(() => task);
+      .pipe(map(() => task));
   }
 
   private _create(task: Partial<ITask>): Observable<ITask> {
     return this._apiService
       .post('tasks', { task })
-      .map((response) => response.json().task);
+      .pipe(map((response) => response.json().task));
   }
 
   private _update(task: Partial<ITask>): Observable<ITask> {
     return this._apiService
       .patch(`tasks/${task.id}`, { task })
-      .map((response) => response.json().task);
+      .pipe(map((response) => response.json().task));
   }
 }

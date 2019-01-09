@@ -9,13 +9,21 @@ The goal of this task is to introduce several concepts that are used heavily in 
   - Actions
   - Reducers
   - Effects
+- GraphQL
+  - Queries
+  - Mutations
+  - Caching with the Apollo Client
+- Routing
 - BEM Styling
-- Tests with Karma
+- Tests with Jest
 - Integration Tests with Cypress
 
 ### App Specifications
 
 - Have an input for users to enter their tasks
+  - Allow tagging new tasks with user-defined names	
+- Have many task lists to users to organize their tasks
+  - Allow navigation between task lists
 - Allow users to delete their entered tasks
 - Allow users to mark their tasks as complete
 - Tasks should show:
@@ -26,7 +34,12 @@ The goal of this task is to introduce several concepts that are used heavily in 
   - Alphabetically
   - By created date
   - Completed tasks are always on the bottom of the list!
-- All data communication and manipulation *must* use NGRX. We want our components to do as little work as possible
+
+##### BONUS
+
+- Allow users to move tasks from one list to another
+- Animations with `@angular/animations`
+- Filtering tasks by tag type(s)
 
 ### Getting Started
 
@@ -80,7 +93,7 @@ You can also setup the workspace settings (open with `cmd` + `,`):
 
 ```
 
-Feel free to customize your user settings outside of the workpsace settings above.
+Feel free to customize your user settings outside of the workspace settings above.
 
 ##### Getting The App Ready
 
@@ -93,9 +106,9 @@ Then run the following:
 $ git clone [URL HERE]
 $ cd platterz-todo
 # Checkout a branch to start working
-$ git checkout -b your-branch-name
+$ git checkout -b FNAME-LNAME-bootcamp
 # Install dependencies
-$ yarn
+$ npm install
 # Start the development server
 $ ng serve
 ```
@@ -104,13 +117,101 @@ You can then navigate to http://localhost:4200 for your new app!
 
 ### What do we have here...
 
-When you load up the app, you'll find a _very_ simple todo application. You're able to add, complete, and delete tasks from your list.
-
-However, it relies on `Input`s and `Output`s, and does not use NGRX. We also have no sorting functionality.
-
-The app comes with the necessary ingredients to move to NGRX: it has the libraries installed, some actions/effects/reducers, plus we already have a `TaskService` to communicate with our API.
+When you load up the app, you'll find a small subset of the functionality required. You are able login and  create a new list, but that's it. You will need to build the rest of the functionality yourself.
 
 We have also already included authentication for your app, so no need to worry there!
+
+#### Apollo Client
+
+Apollo Client is a set of libraries used to interface with GraphQL. It includes the actual API service and a caching mechanism for requests made to our API.
+
+The Angular library for Apollo is Observable based, which nicely integrates into our existing patterns and workflows, and helps us keep our applications performant.
+
+The way we make sure that our front end is through the use of a `schema.json` file. It holds all the query, mutation, and type definitions on your backend, so you can verify your GraphQL code easily. Apollo also provides tooling to read your queries and the schema, and generate TypeScript definitions that you can use in your code to stay type-safe.
+
+There are 3 main functions that you will use in your application:
+
+- `query`: Make a single query request to the backend and return data as it is
+- `watchQuery`: Make a query request to the backend, but also watch for changes in the cache and propagate
+- `mutate`: Make a mutation request to the backend to change data, you can also trigger updates to queries on success
+
+Components that make use of the Apollo client function like regular components, with an added `graphql` file to store query and mutation definitions. Below is an example of a component that lists some records and watches for changes:
+
+```typescript
+# hero-list.component.ts
+@Component({
+  selector: 'pl-hero-list',
+  templateUrl: './hero-list.component.html',
+  styleUrls: ['./hero-list.component.scss']
+})
+export class HeroListComponent extends RXComponent implements OnInit {
+  query: QueryRef<HeroList>;
+
+  heroes$: Observable<HeroListHero>;
+  
+  constructor(private _apollo: Apollo) {}
+  
+  ngOnInit(): void {
+    this.query = this._apollo
+      .watchQuery<HeroList>({
+      	# Always make a network request, but use the cache as well
+      	fetchPolicy: 'cache-and-network',
+  	    query: HeroListQuery,
+        variables: { type: HeroType.Speedster }
+	    });
+    
+    # Pull changes from the store and display
+    this.heroes$ = this.query.valueChanges
+    	.pipe(
+      	takeUntil(this._ngOnDestroy),
+      	map((result) => result && result.data.heroes));
+  }
+}
+```
+
+```html
+<!-- hero-list.component.html -->
+<header class="plHeroList-header">
+  Speedster Heroes
+</header>
+<section class="plHeroList-heroes">
+  <section class="plHeroList-hero" *ngFor="let hero of heroes$ | async">
+    {{ hero.name }} - {{ hero.secretIdentity }}
+  </section>
+</section>
+```
+
+```typescript
+# hero-list.component.graphql.ts
+
+export const HeroListHero = gql`
+	fragment HeroListHero on Hero {
+		id
+		name
+		secretIdentity
+	}
+`;
+
+export const HeroListQuery = gql`
+  query HeroList($type: HeroType) {
+		heroes(type: $type) {
+      heroes {
+        ...HeroListHero
+      }
+		}
+  }
+	${HeroListHero}
+`;
+
+```
+
+##### This looks cool, but what's actually going on here?
+
+This component's main function is to list some heroes with the `Speedster` type and display their names and secret identities. It will first create a `QueryRef`, which Apollo uses to track queries in the application. The heroes themselves come from the query result. Since it's using `watchQuery`, and subsequent queries that request the same records with new info will automatically propagate that new info to this component.
+
+The `hero-list.graphql.ts` file holds the actual query we are using. 
+The `HeroListHero` const at the top is a `fragment`, which is basically a reusable part of a query. It also allows us to have more manageable TypeScript `interface` names (deeply nested queries could end up with interfaces named like `HeroList_heroes_father_brother_uncle_formerRoommate`).
+The `HeroListQuery` is the actual query that we are using in the component. Here we define that we are requesting `heroes`, and that we want the hero to use the `fragment` from earlier for the hero fields. We then interpolate the `fragment` in this string so that the backend knows what it looks like.
 
 #### What is NGRX?
 
@@ -121,6 +222,8 @@ Data on the store should **never** be manipulated directly, as that causes your 
 Dispatched actions are run through a function called a `Reducer`. Reducers are responsible for taking an action and updating the store based on the type of the action and the payload included.
 
 All actions are processed synchronously, so what do you do if an action needs to trigger an API request? NGRX also has the concept of `Effects`. These are run asynchronously, which allows you to perform async commands as a *side effect* of the actions you dispatch.
+
+Much of our code in the Home application uses this pattern heavily for both application state (settings, filters, etc) and data storage (data fetched from the backend). As we (re-)implement more features with GraphQL and Apollo, NGRX will only be used in the future to store application state, with data storage relegated to Apollo.
 
 ##### State Interface
 
