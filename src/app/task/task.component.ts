@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import { RXComponent } from '../../rx-component/rx-component';
+import { RXComponent } from '../rx-component/rx-component';
 
 @Component({
   selector: 'pl-task',

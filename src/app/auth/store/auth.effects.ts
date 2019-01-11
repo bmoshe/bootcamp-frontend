@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Actions, Effect } from '@ngrx/effects';
 import { Observable } from 'rxjs';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
@@ -16,7 +17,8 @@ import {
 export class AuthEffects {
   constructor(
     private _actions: Actions,
-    private _authService: AuthService
+    private _authService: AuthService,
+    private _router: Router
   ) { }
 
   @Effect()
@@ -28,6 +30,7 @@ export class AuthEffects {
           .login(action.email, action.password)
           .pipe(
             tap((session) => localStorage.setItem('authToken', session.token)),
+            tap(() => this._router.navigateByUrl('/task-lists')),
             map((session) => new AuthLoginSuccessAction(session)),
             catchError((errors) => [new AuthLoginFailureAction(errors)]));
       }));
