@@ -1,33 +1,21 @@
-// tslint:disable:max-classes-per-file
 import { Action } from '@ngrx/store';
-import { IApiError } from '../../api/api.error';
-import { ITask } from '../task';
+import { TaskSortOrder, TaskSortType } from './task.state';
 
 export enum TaskActions {
-  RequestList = '[TASK] Request List',
-  RequestListSuccess = '[TASK] Request List Success',
-  RequestListFailure = '[TASK] Request List Failure'
+  UpdateSortType = '[TASK] Update Sort Type',
+  UpdateSortOrder = '[TASK] Update Sort Order'
 }
 
-export class TaskRequestListAction implements Action {
-  readonly type: typeof TaskActions.RequestList = TaskActions.RequestList;
+export class TaskUpdateSortTypeAction implements Action {
+  readonly type: typeof TaskActions.UpdateSortType = TaskActions.UpdateSortType;
+
+  constructor(readonly sortType: TaskSortType) { }
 }
 
-export class TaskRequestListSuccessAction implements Action {
-  readonly type: typeof TaskActions.RequestListSuccess = TaskActions.RequestListSuccess;
+export class TaskUpdateSortOrderAction implements Action {
+  readonly type: typeof TaskActions.UpdateSortOrder = TaskActions.UpdateSortOrder;
 
-  constructor(public tasks: ITask[]) { }
+  constructor(readonly sortOrder: TaskSortOrder) { }
 }
 
-export class TaskRequestListFailureAction implements Action {
-  readonly type: typeof TaskActions.RequestListFailure = TaskActions.RequestListFailure;
-
-  constructor(public errors: IApiError) { }
-}
-
-export type TaskAction
-  = TaskRequestListAction
-  | TaskRequestListSuccessAction
-  | TaskRequestListFailureAction;
-
-// tslint:enable:max-classes-per-file
+export type TaskAction = TaskUpdateSortTypeAction | TaskUpdateSortOrderAction;

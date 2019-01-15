@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { IApiError } from '../api/api.error';
-import { ReactiveComponent } from '../reactive-component/reactive-component';
+import { RXComponent } from '../rx-component/rx-component';
 import { IAppState } from '../store/app.state';
 import { AuthLoginAction } from './store/auth.actions';
 import { selectAuthLoginErrors } from './store/auth.selectors';
@@ -12,7 +13,7 @@ import { selectAuthLoginErrors } from './store/auth.selectors';
   styleUrls: ['./auth.component.scss'],
   templateUrl: './auth.component.html'
 })
-export class AuthComponent extends ReactiveComponent implements OnInit {
+export class AuthComponent extends RXComponent implements OnInit {
   email: string;
   password: string;
 
@@ -25,7 +26,7 @@ export class AuthComponent extends ReactiveComponent implements OnInit {
   ngOnInit(): void {
     this.loginErrors$ = this._store
       .select(selectAuthLoginErrors)
-      .takeUntil(this._ngOnDestroy);
+      .pipe(takeUntil(this._ngOnDestroy));
   }
 
   login(): void {

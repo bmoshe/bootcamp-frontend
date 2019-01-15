@@ -1,0 +1,44 @@
+@import '../../../assets/styles/variables/variables';
+@import '../../../assets/styles/mixins/mixins';
+
+:host {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  display: flex;
+  width: 20rem;
+  padding: 1rem 1rem 0;
+  background: $white;
+  border-radius: $base-padding / 2;
+  box-shadow: 0 0 5px 1px $gray-light;
+  overflow: hidden;
+}
+
+.plAllTaskLists-header {
+  width: 100%;
+  font-size: $pl-fs-5;
+  font-weight: $pl-fw-s-bold;
+}
+
+.plAllTaskLists-link {
+  display: flex;
+  width: calc(100% + 2rem);
+  padding: .5rem 1rem;
+  margin-right: -1rem;
+  margin-left: -1rem;
+  text-decoration: none;
+  color: $brand-green;
+
+  &.isActive,
+  &:hover,
+  &:focus {
+    background-color: $brand-green;
+    color: $white;
+  }
+}
+
+.plAllTaskLists-header + .plAllTaskLists-link {
+  margin-top: 1rem;
+}

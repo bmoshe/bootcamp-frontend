@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Actions, Effect } from '@ngrx/effects';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs';
+import { catchError, map, switchMap, tap } from 'rxjs/operators';
 import { AuthService } from '../auth.service';
 import { AuthRehydrateAction, AuthRehydrateSuccessAction } from './auth.actions';
 import {
@@ -15,32 +17,36 @@ import {
 export class AuthEffects {
   constructor(
     private _actions: Actions,
-    private _authService: AuthService
+    private _authService: AuthService,
+    private _router: Router
   ) { }
 
   @Effect()
   loginEffect(): Observable<AuthAction> {
     return this._actions
       .ofType<AuthLoginAction>(AuthActions.Login)
-      .switchMap((action) => {
+      .pipe(switchMap((action) => {
         return this._authService
           .login(action.email, action.password)
-          .do((session) => localStorage.setItem('authToken', session.token))
-          .map((session) => new AuthLoginSuccessAction(session))
-          .catch((errors) => [new AuthLoginFailureAction(errors)]);
-      });
+          .pipe(
+            tap((session) => localStorage.setItem('authToken', session.token)),
+            tap(() => this._router.navigateByUrl('/task-lists')),
+            map((session) => new AuthLoginSuccessAction(session)),
+            catchError((errors) => [new AuthLoginFailureAction(errors)]));
+      }));
   }
 
   @Effect()
   rehydrateEffect(): Observable<AuthAction> {
     return this._actions
       .ofType<AuthRehydrateAction>(AuthActions.Rehydrate)
-      .switchMap((action) => {
+      .pipe(switchMap((action) => {
         return this._authService
           .currentSession()
-          .do((session) => localStorage.setItem('authToken', session.token))
-          .map((session) => new AuthRehydrateSuccessAction(session))
-          .catch(() => [new AuthRehydrateSuccessAction(null)]);
-      });
+          .pipe(
+            tap((session) => localStorage.setItem('authToken', session.token)),
+            map((session) => new AuthRehydrateSuccessAction(session)),
+            catchError(() => [new AuthRehydrateSuccessAction(null)]));
+      }));
   }
 }

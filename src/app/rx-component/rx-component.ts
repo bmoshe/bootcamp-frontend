@@ -1,8 +1,8 @@
-import { OnDestroy, Type } from '@angular/core';
-import { Observable, Subject } from 'rxjs/Rx';
+import { OnDestroy } from '@angular/core';
+import { Observable, Subject } from 'rxjs';
 import * as uuid from 'uuid/v4';
 
-export abstract class ReactiveComponent implements OnDestroy {
+export abstract class RXComponent implements OnDestroy {
   protected _ngOnDestroy: Observable<void>;
   protected _uuid: string;
 

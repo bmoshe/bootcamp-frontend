@@ -1,28 +1,23 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
-import { TaskEffects } from './store/task.effects';
+import { CreateTaskComponent } from './create-task/create-task.component';
 import { taskReducer } from './store/task.reducer';
 import { TASK_STATE_NAME } from './store/task.state';
-
-import { TaskListComponent } from './task-list/task-list.component';
-import { TaskService } from './task.service';
+import { TaskComponent } from './task.component';
 
 @NgModule({
   declarations: [
-    TaskListComponent
+    TaskComponent,
+    CreateTaskComponent
   ],
   exports: [
-    TaskListComponent
+    TaskComponent,
+    CreateTaskComponent
   ],
   imports: [
     CommonModule,
-    StoreModule.forFeature(TASK_STATE_NAME, taskReducer),
-    EffectsModule.forFeature([TaskEffects])
-  ],
-  providers: [
-    TaskService
+    StoreModule.forFeature(TASK_STATE_NAME, taskReducer)
   ]
 })
 export class TaskModule { }

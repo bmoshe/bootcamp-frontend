@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Headers, Http, Request, RequestOptionsArgs, Response, URLSearchParams } from '@angular/http';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 import { environment } from '../../environments/environment';
 
@@ -13,37 +14,37 @@ export class ApiService {
   get(url: string, options?: RequestOptionsArgs): Observable<Response> {
     return this.http
       .get(this._buildUrl(url), this._buildOptions(options))
-      .catch(this.errorHandler) as Observable<Response>;
+      .pipe(catchError(this.errorHandler)) as Observable<Response>;
   }
 
   post(url: string, body: any, options?: RequestOptionsArgs): Observable<Response> {
     return this.http
       .post(this._buildUrl(url), body, this._buildOptions(options))
-      .catch(this.errorHandler) as Observable<Response>;
+      .pipe(catchError(this.errorHandler)) as Observable<Response>;
   }
 
   put(url: string, body: any, options?: RequestOptionsArgs): Observable<Response> {
     return this.http
       .put(this._buildUrl(url), body, this._buildOptions(options))
-      .catch(this.errorHandler) as Observable<Response>;
+      .pipe(catchError(this.errorHandler)) as Observable<Response>;
   }
 
   patch(url: string, body: any, options?: RequestOptionsArgs): Observable<Response> {
     return this.http
       .patch(this._buildUrl(url), body, this._buildOptions(options))
-      .catch(this.errorHandler) as Observable<Response>;
+      .pipe(catchError(this.errorHandler)) as Observable<Response>;
   }
 
   delete(url: string, options?: RequestOptionsArgs): Observable<Response> {
     return this.http
       .delete(this._buildUrl(url), this._buildOptions(options))
-      .catch(this.errorHandler) as Observable<Response>;
+      .pipe(catchError(this.errorHandler)) as Observable<Response>;
   }
 
   options(url: string, options?: RequestOptionsArgs): Observable<Response> {
     return this.http
       .options(this._buildUrl(url), this._buildOptions(options))
-      .catch(this.errorHandler) as Observable<Response>;
+      .pipe(catchError(this.errorHandler)) as Observable<Response>;
   }
 
   errorHandler(error: any): Observable<IApiError> {
