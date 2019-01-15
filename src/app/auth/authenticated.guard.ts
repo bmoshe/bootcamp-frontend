@@ -19,6 +19,6 @@ export class AuthenticatedGuard implements CanActivate {
       .pipe(
         filter((status) => [AuthStatus.Authenticated, AuthStatus.Unauthenticated].includes(status)),
         take(1),
-        map((status) => status === AuthStatus.Authenticated ? true : this._router.parseUrl('/auth')));
+        map((status) => status === AuthStatus.Authenticated || this._router.parseUrl('/auth')));
   }
 }
